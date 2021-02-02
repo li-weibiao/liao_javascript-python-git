@@ -1,0 +1,70 @@
+2.3.3  从字符串中获取单个字符
+有时你想要从一个字符串中获取单个字符。
+
+使用方括号（[]）从一个字符串中获取指定位置的字符。
+在字符串或包含字符串的变量的末尾，把需要的字符的编号放到一对方括号中。
+例如，要获取myName的第一个字符，使用myName[0]。
+var myName = "Nick";
+
+myName[0];
+
+"N"
+
+注意，要获取字符串的第一个字符，使用0而不是1。
+
+
+2.3.4  截取字符串
+要截取一大串字符，可以使用slice。
+使用slice，要在字符串（或者包含字符串的变量）后边放一个点，后面跟着单词slice和一对圆括号。
+在括号里边，输入想要截取的字符串的开始位置和结束位置，之间用逗号隔开。
+var longString = "My long string is long";
+
+longString.slice(3, 14);
+
+"long string"
+
+括号中的第一个数字是要截取的字符串的开始字符位置，第二个数字是要截取字符串的最后一个字符位置。
+
+如果在slice后面的括号中只有一个数字，将从字符串的这个位置开始截取，到字符串末尾结束。
+
+
+2.3.5  把字符串转换为全部大写或全部小写
+使用toUpperCase()把字符串内容全部转换成大写字母。
+当对一个字符串使用.toUpperCase()时，会将其所有字母转换为大写字母。
+var daXiao = "i love asuka";
+
+daXiao.toUpperCase();
+
+"I LOVE ASUKA"
+
+当使用.toLowerCase()会把所有字母都变成小写。
+longString.toLowerCase();  //沿用上面设置的longString的变量
+"my long string is long"
+
+思考：如何让句子的首字母大写，而把剩余部分全部转换成小写字母呢？
+有一个方法：
+1.var sillyString = "hELLO THERE, HOW ARE YOU DOING?";
+
+2.var lowerString = sillyString.toLowerCase();
+
+3.var firstCharacter = lowerString[0];
+
+4.var firstCharacterUpper = firstCharacter.toUpperCase();
+
+5.var restOfString = lowerString.slice(1);
+
+6.firstCharacterUpper + restOfString;
+
+"Hello there, how are you doing?"
+
+因为值和变量之间彼此都可以替换，所以可以把2到6行合并为一行，如：
+1.var sillyString = "hELLO THERE, HOW ARE YOU DOING?";
+
+2.sillyString[0].toUpperCase() + sillyString.slice(1).toLowerCase();
+
+"Hello there, how are you doing?"
+
+然而，按照这种方式编写代码，容易令人混淆，所以，对于复杂任务的每一步都使用变量，这是个好主意。
+至少这样可以让复杂代码阅读起来更方便。
+
+
