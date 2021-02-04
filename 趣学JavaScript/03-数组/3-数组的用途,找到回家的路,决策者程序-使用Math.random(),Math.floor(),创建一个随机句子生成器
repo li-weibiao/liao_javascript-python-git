@@ -1,0 +1,79 @@
+3.7 数组的用途
+
+3.7.1 找到回家的路
+用.push()创建数组。
+用.pop()逆向遍历
+
+先放入数组的，会后被取出
+
+在较大一些的程序中，使用这样的过程实际上很常见，这就是为什么JavaScript会把push和pop设计得如此简单。
+
+注意：这种技术在计算机语言中叫做栈(stack)。可以把它想象成一堆煎饼。每次你做一个新的煎饼，就会把它放在最上边（就像push一样），每次
+吃掉一个，就从最上边拿掉它（就像pop）。从栈中弹出就像是时光倒流：最后pop出来的元素就是最先push进去的元素。这与摊煎饼一样：吃的最后一个煎饼是最先做出来的。
+用变成的术语来讲，这叫做后进先出。
+与LIFO相对的是先进先出，也叫做队列（queue）。
+
+3.7.2 决策者程序
+在JavaScript中，我们可以使用数组来创建一个做决定的程序，然而首先需要知道获取随机数字的方法。
+
+使用Math.random()的方法来生成随机数字，每次调用它，都会返回0到1之间的一个随机数。
+Math.random();
+
+0.5041782707132456  //随机返回0到1之间的数字
+
+要注意的很重要的一点就是，Math.random()总是返回小于1的数字，而从不返回1。
+
+如果想要更大的数字，只需要把Math.random()的结果乘以一定的倍数。如想要得到0到10之间的数字，只需要把Math.random()和10相乘。
+Math.random() * 10;
+
+4.034659935275724
+
+如果要用这些数字作为数组的索引，则需要使用Math.floor()的方法，它会让数字只保留整数部分（放弃小数点后边的数字），因为索引必须是整数。
+Math.floor(3.74);
+
+3
+
+var randomNumber = Math.random();
+
+Math.floor(randomNumber);
+
+0  // 没有乘以倍数，就只会得到0
+
+var randomNumber = Math.random() * 10;
+
+Math.floor(randomNumber);
+
+8
+
+可以把这两种技术组合到一起，以创建一个随机索引。需要做的就是把Math.random()和数组的长度相乘，然后对该值调用Math.floor()。
+Math.floor(Math.random() * 4);
+
+2  // 可能是0，1，2，3
+
+现在，如果使用该随机数作为一个索引，就可以从数组中随机的选择一个元素。
+var randomWords = ["Explosion", "Cave", "Princess", "Pen"];
+
+var randomIndex = Math.floor(Math.random() * 4);
+
+randomWords[randomIndex];
+
+"Cave"
+
+这里使用Math.floor(Math.random() * 4);来获取0到3之间的一个随机数字。一旦把随机数保存到randomIndex变量中，就可以使用它作为索引，从randomWords数组中获取字符串。
+实际上，可以完全把randomIndex变量省略掉，只写成：
+randomWords[Math.floor(Math.random() * 4)];
+
+"Princess"
+
+现在创建短语的数组，然后可以使用代码来获取一个随机的短语，这就是决策者程序！
+创建了一个名为phrases的数组，它用来保存一些不同的建议。现在每次有了问题，就可以从phrases数组中获取一个随机的值，
+它会帮助我们做一个决定。
+
+注意，因为决策数组有5个元素，所以Math.random()要乘以5。这样就会总是返回5个索引位置之一：0，1，2，3或4。
+
+3.7.3 创建一个随机句子生成器
+注意不同变量之间连接左右加个空格，如"your " + randomBodyPart + " is like a " + " apple " + "!!!";
+
+我们知道Math.random()总是需要乘以数组的长度，所以使用randomWords.length，这意味着即使数组长度改变了，也不需要修改代码。
+
+在连接句子的时候可以使用.join(" ")的方法，括号里有一个空格，如果字符串之间不想要空格，则可以使用+操作符来连接之间没有空格的两个字符串。
