@@ -1,0 +1,183 @@
+3.5  数组中的混合数据类型
+不是所有的数组元素都必须是相同的类型。
+数组可以包含数字，字符串，以及数组。
+
+要想访问数组中的内嵌数组的单个元素，需要使用第二组方括号。
+var dinosaursAndNumbers = [3, "dinosaurs", ["triceratops", "stegosaurus", 3627.5], 10];  //定义变量dinosaursAndNumbers
+undefined
+
+dinosaursAndNumbers[2];
+  //取出变量里的数组
+["triceratops", "stegosaurus", 3627.5]
+
+dinosaursAndNumbers[2][0];  //取出内嵌数组的单个元素
+"triceratops"
+
+当输入dinosaursAndNumbers[2][0]时，我们告诉JavaScript要查找dinosaursAndNumbers
+数组的第二个元素，该元素是数组["triceratops", "stegosaurus", 3627.5]，然乎返回该数组中索引为0
+的位置的值。索引0是第二个数组的第一个值，即"triceratops"。
+
+
+3.6  使用数组
+属性和方法帮助我们使用数组。
+属性通常会告诉我们关于数组的一些信息，方法通常会修改数组或者返回一个新的数组。
+
+3.6.1 查看数组的长度
+有时候，知道数组中有多少个元素会很有帮助。
+数组的length属性告诉我们数组中有多少个元素。要查看数组的长度，只需要在数组的名称后边加上.length即可。
+来试试看，首先创建带有3个元素的一个数组：
+var maniacs = ["Yakko", "Wakko", "Dot"];
+
+undefined
+
+要查看数组的长度，在maniacs后边加上.length:
+maniacs.length;
+
+3
+
+JavaScript告诉我们数组中有3个元素，已经知道它们的索引分别是0，1和2。这给我们了一条有用的信息：数组中最后一个索引总是等于数组长度减去1。
+这意味着，不管数组有多长，都有一种简单的方法来访问数组中最后一个元素：
+maniacs[maniacs.length - 1];
+
+"Dot"
+
+这里，要求JavaScript返回数组中的一个元素，但是并不是在方括号中输入一个索引值，而是使用了一点数学：数组的长度减1。
+JavaScript首先查看maniacs.length，得到3；然后再减1得到2。那么它就返回maniacs数组中的最后一个索引（2）的元素——“Dot”。
+
+3.6.2 为数组添加元素
+要在数组的末尾添加元素，可以使用push方法。在数组名称后边加上.push，后面跟着想要添加的元素，该元素放在圆括号中。
+var animals = [];
+
+animals.push("cat");
+
+animals.push("Dog");
+
+animals.push("Llama");
+3
+
+animals;
+
+["cat", "Dog", "Llama"]
+
+animals.length;
+
+3
+
+在计算机中，运行方法的行为叫做方法调用。
+当调用push方法时，会发生两件事情。首先，把圆括号中的元素添加到数组中。
+其次，返回数组新的长度。这就是为什么每次调用push方法，都会看到输出一个数字。
+
+要在数组的起始位置添加元素，可以使用.unshift()。
+animals.unshift("Monkey");
+
+4
+
+animals;
+
+["Monkey", "cat", "Dog", "Llama"]
+
+用unshift把元素添加进数组后，每一次原有的值都会向后顺延一个索引位置。
+所以cat从最初的索引是0，现在是1。
+
+每次调用unshift，也会返回数组新的长度，就像push一样。
+
+3.6.3 从数组中删除元素
+要从数组中删除最后一个元素，可以在数组名称末尾添加.pop()来弹出该元素。
+pop方法非常方便，因为它做了两件事情：删除最后一个元素，并且将其作为返回值返回。
+var lastAnimal = animals.pop();
+  //定义一个新变量，让它保存animals弹出的元素
+lastAnimal;
+
+"Llama"
+
+animals;
+
+["Monkey", "cat", "Dog"]
+
+animals.pop();
+
+"Dog"
+
+animals;
+
+["Monkey", "cat"]
+
+animals.unshift(lastAnimal);
+  //可以用unshift添加变量
+3
+
+animals;
+
+["Llama", "Monkey", "cat"]
+
+当使用animals.pop()删除"Dog"时，并没有把它保存到变量中，所以这个值没有保存到任何地方。
+
+要删除并返回数组中的第一个元素，使用.shift()。
+animals;
+
+["Llama", "Monkey", "cat"]
+
+var firstAnimal = animals.shift(); //用变量firstAnimal来保存，animals.shift()删除的第一个元素
+firstAnimal;
+
+"Llama"
+
+animals;
+
+["Monkey", "cat"]
+
+可以使用unshift和shift，从数组的开始处添加或删除元素，就像使用push和pop从数组的末尾处添加和删除元素一样。
+
+3.6.4 数组相加
+要把两个数组加在一起生成一个新的，单个的数组，可以使用firstArray.concat(otherArray)。concat表示把两个值连接到一起的计算机术语。
+firstArray中的值添加到了otherArray中的值前面。
+var comicPerson = ["Nanudo", "asuka"];
+
+var realPerson = ["JetLi", "JackChen"];
+
+var addPerson = comicPerson.concat(realPerson);
+
+addPerson;
+
+["Nanudo", "asuka", "JetLi", "JackChen"]
+
+可以使用concat把多个数组连接到一起，只需要把其他的数组放在圆括号之内，数组之间用逗号隔开。
+
+3.6.5 查找数组中单个元素的索引
+要查找数组中单个元素的索引，使用.indexOf(element)。
+var colors = ["red", "green", "blue"];
+
+colors.indexOf("blue");
+
+2
+
+indexOf就像是使用方括号获取特定索引位置的值的反向操作，colors[2]是"blue"，所以.indexOf("blue")是2。
+
+如果要找的元素不在数组中，JavaScript返回-1。
+
+如果数组中有多个该元素，indexOf方法会返回该元素在数组中的第一个索引位置。
+
+3.6.6 把数组转换成字符串
+可以使用.join()把数组中所有的元素连接到一起，形成一个大字符串。
+comicPerson.join();  //沿用上面定义的comicPerson这个变量
+"Nanudo,asuka"
+
+当调用一个数组的join方法时，它会返回包含所有元素的一个字符串，元素之间用逗号隔开。
+如果不想使用逗号作为分隔符，可以使用.join(分隔符)来做同样的事，其中使用自己所选择的分隔符。分隔符是放在圆括号中的任意字符串。
+要注意的是，需要为分隔符加上引号，因为分隔符是一个字符串。
+comicPerson.join('-');
+
+"Nanudo-asuka"
+
+comicPerson.join("*");
+
+"Nanudo*asuka"
+
+如果有一个数组想要转换成一个字符串，join函数会很有用。
+
+如果数组的值不是字符串，在把它们组合到一起之前，JavaScript会先把它们转换成字符串。
+var ages = [11, 14, 79];
+
+ages.join(" ");  //用空格作为分隔符
+"11 14 79"
+
