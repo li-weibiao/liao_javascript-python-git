@@ -1,0 +1,39 @@
+第6章 条件与循环
+我们把条件和循环叫做控制结构，因为它们允许根据定义的特定条件，控制在何时以何种频度来执行哪部分代码。
+
+6.1 在HTML中嵌入JavaScript
+代码：
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My first proper HTML page</title>
+</head>
+<body>
+	<h1>Hello world!</h1>
+	<p>My <em>first</em>  <strong>web page</strong>.</p>
+	<script type="text/javascript">
+		var message = "Hello world!";
+		console.log(message);
+	</script>
+</body>
+</html>
+
+这里添加了一个名为script的新元素。
+在Web页面中，不会打印JS的内容，可以使用console.log来打印内容。
+console.log方法会接收任意的值，然后把值打印到控制台。
+
+6.2 条件
+在JS中由两种形式的条件语句：if语句和if...else语句。
+
+6.2.1 if语句
+if只有条件为真时，才会用它来执行代码。
+var name = "Nicholas";
+console.log("Hello " + name);
+if (name.length > 7) {
+  console.log("Wow, you have a Really long name!");
+}
+
+if语句有两个主要部分：条件和主体。
+条件因该是一个布尔值。主体是一行或多行JS代码。如果条件为真，就可以执行这些代码。
+
+只有条件为真时，才会执行if语句中的主体部分。当条件为假，解释器直接跳过这条if语句，转到下一行。
