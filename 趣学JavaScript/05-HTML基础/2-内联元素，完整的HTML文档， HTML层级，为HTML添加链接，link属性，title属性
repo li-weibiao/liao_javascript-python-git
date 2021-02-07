@@ -1,0 +1,29 @@
+5.3.4 内联元素
+再添加两个元素到文档中，它们是em和strong：
+<h1>Hello world!</h1>
+<p>My <em>first</em>  <strong>web page</strong>.</p>
+<p>Let's add another <strong><em>paragraph</em></strong></p>
+
+em元素使得其中的内容成为斜体。strong元素使得其在内容成为粗体。
+em元素和strong元素都是内联元素，这意味着它们不会像块级元素那样把其中的内容放在新的一行中。
+
+5.4 完整的HTML文档
+包含头部和身体等元素。
+
+5.5 HTML层级
+顶层元素是HTML元素。它包含了head元素和body元素。head元素包含了title元素，body包含h1元素。
+浏览器按照这个层级顺序来解释HTML。
+
+5.6 为HTML添加链接
+a元素（定位元素）可以创建一个链接元素。
+
+5.6.1 link属性
+给a元素添加属性。例如：
+<a href="http://www.baidu.com">Click here</a>
+
+在这个示例中，属性名称是href，属性值是http://www.baidu.com。名称href表示超链接引用，这是表示Web地址的一种奇特方式。
+Click here这个文本会作为链接出现，而它会把我们带到作为href属性的值输入的任何Web地址。
+
+5.6.2 title属性
+可以添加给链接的另一个属性是title属性。这个属性可以设置当鼠标悬停在一个链接上时所看到的文本。
+
