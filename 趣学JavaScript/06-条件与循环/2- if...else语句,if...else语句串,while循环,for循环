@@ -72,3 +72,7 @@ var name = "Li";
 for (var i =0; i < name.length; i++){
 console.log("My name contains the letter " + name[i] + ".");
 }
+
+6.4 小结
+当特定条件为真时，用条件来执行代码。循环用来执行代码多次，只要特定条件为真，代码就会一直执行。
+可以使用条件保证在正确的时间执行正确的代码，可以使用循环让程序根据需要一直运行下去。
