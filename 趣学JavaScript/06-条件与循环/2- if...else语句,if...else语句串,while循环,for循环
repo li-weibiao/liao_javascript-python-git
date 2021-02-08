@@ -1,0 +1,74 @@
+6.2.2 if...else语句
+条件为真，if语句才会执行主体，如果条件为假还想做些事情，就需要使用if...else语句了。
+<script type="text/javascript">
+……
+var name = "Nicholas";
+console.log("Hello " + name);
+if (name.length > 7) {
+  console.log("Wow, you have a Really long name!");
+} else {
+  console.log("your name isn't very long.");
+}
+</script>
+
+6.2.3 if...else语句串
+要创建一连串的if...else语句，要从常规的if语句开始，在主体的结束括号之后，输入关键字else if，紧跟着另一个条件和另一个主体。
+如果没有条件为真，就会执行最后一个else部分。
+if (){;  //以分号作为结尾
+} else if (){
+;} else {
+;} 
+
+当使用诸如这样一个带else部分的 if...else语句串的时候，就可以确保一个主体会执行。
+只要发现一个条件为真，就会执行其所对应的主体，不会再验证其他条件。
+
+有一件事需要注意：最后的else不是必须的。然而，如果没有这个else，当所有条件都不为真时， if...else语句串中的内容都将不会执行。
+
+6.3 循环
+循环会根据一个条件是否持续为真，而会执行一段代码多次。
+
+6.3.1 while循环
+while循环重复执行它的主体，直到特定条件不再为真。
+当使用while时，后面圆括号中跟的是条件，然后是放在一个花括号中的主体。
+每次循环重复的时候，都会检查这个条件。
+while () {
+;  //主体以分号结尾
+}
+
+如果条件为真，while就会一直执行。
+
+例如用while编写一个循环属羊的代码：
+<script type="text/javascript">
+var sheepCounted = 0;
+while( sheepCounted < 10 ){
+	console.log("I have counted "+ sheepCounted + "sheep!");
+	sheepCounted++;
+}
+document.getElementById("demo").innerHTML = sheepCounted;
+console.log("Zzzz");
+</script>
+
+注意：如果没有sheepCounted++，则会陷入死循环。
+
+6.3.2 for循环
+当设置一个for循环时，要创建一个变量，指定条件，然后指明在每轮循环之后如何修改这个变量，
+而所有这些都在到达循环的主体之前执行。
+
+如用for循环属羊：
+for (var sheepCounted =0; sheepCounted < 10; sheepCounted++) { console.log("I have counted "+ sheepCounted + "sheep!");
+}
+console.log("Zzzz");
+
+for循环括号里面用分号隔开的3个部分，分别是：初始化、条件、和自增。
+
+循环开始前先要进行初始化，通常会创建一个变量来记录循环运行的次数。
+每次运行body之前，都会检查条件，如果条件为true，会执行循环体，如果是false则终止循环。
+每次运行完主体之后，都会执行自增，这通常用来更新循环变量。
+
+对数组和字符串使用for循环：
+for循环的一种很常见的用法是，对数组中每个元素执行操作，或者对字符串中的每个字符执行操作。
+比如用for循环来遍历字符串：
+var name = "Li";
+for (var i =0; i < name.length; i++){
+console.log("My name contains the letter " + name[i] + ".");
+}
