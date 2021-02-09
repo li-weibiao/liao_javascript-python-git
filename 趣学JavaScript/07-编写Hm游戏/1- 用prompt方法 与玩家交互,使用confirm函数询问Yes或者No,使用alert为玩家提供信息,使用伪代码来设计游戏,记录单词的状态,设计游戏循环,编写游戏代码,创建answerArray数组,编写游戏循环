@@ -1,0 +1,86 @@
+第7章 创建Hangman游戏
+我们会介绍如何使用对话框来进行游戏交互。
+
+7.1 与玩家交互
+7.1.1 创建一个输入对话框
+新建html文档，要创建一个输入对话框，在<script>标签中输入如下代码：
+var name = prompt("What's your name?");
+console.log("Hello " + name);
+
+当调用prompt方法时，会弹出一个小窗口。
+
+在浏览器中，对话框的标题是JavaScript，它用来告诉玩家，这个输入框是通过JavaScript生成的。
+
+7.1.2 使用confirm函数询问Yes或者No
+confirm函数是通过询问yes或者no（布尔值），而不使用文本框来获取用户输入的一种方法。
+var likeCats = confirm("Do you like cats?");
+if (likeCats) {
+  console.log("You are a cool cat!");
+} else {
+  console.log("Yeah, that's fine. you're still cool!");
+}
+
+confirm对话框的结果会作为一个布尔值返回。
+
+7.1.3 使用alert为玩家提供信息
+想要提供一些信息，可以使用alert对话框显示的一条信息，对话框带有一个OK按钮。
+alert("火影忍者更新了！！！");
+
+alert对话框只显示一条信息，然后等待用户点击ok按钮。
+
+7.1.4 为什么使用alert对话框而不是console.log呢？
+使用alert玩家不必中断游戏并打开控制台查看状态信息，而且使用过程中，会暂停JS解释器，这意味着，玩家有时间去阅读警告信息。
+另一方面，使用console.log的话，会立即显示文本，并且解释器会移动到程序的下一行。
+
+7.2 设计游戏
+7.2.1 使用伪代码来设计游戏
+伪代码是一种方便的工具，程序员经常用它来设计程序。
+伪代码有循环和条件，但是除此之外，一切都只是纯粹的英语。
+
+伪代码能够让我们知道如何构造自己的程序。
+
+7.2.2 记录单词的状态
+首先创建一个空白数组，当玩家猜测的字母正确时，将字母填充到数组中。
+用字符串"_"表示每个空白。
+
+用一个变量来记录玩家还要猜测的剩余字母的数量。每次猜对一个字母，这个变量会减一。
+如果等于0，我们就知道玩家赢了。
+
+7.2.3 设计游戏循环
+主要的游戏过程都发生在while循环中。
+
+几乎所有的计算机游戏都是围绕着某种循环来构建的。
+
+7.3 编写游戏代码
+7.3.1 选择一个随机单词
+var words = ["word", "hello"];
+var word = words[Math.floor(Math.random()) * ]
+
+使用Math.random()和Math.floor()从数组中随机挑选一个单词。
+
+7.3.2 创建answerArray数组
+接下来，创建一个名为answerArray空数组，使用和单词字母相同的下划线(_)来填充该数组。
+var answerArray = [];
+for (var i = 0; i < word.length; i++) { answerArray[i] = "_"; }
+var remainingLetters = word.length;
+
+创建remainingLetters变量，来记录神秘单词的长度。
+使用这个变量来记录还剩下几个字母要猜。每次玩家猜对一个字母，针对该字母在单词中的每个实例，这个值都会减一。
+
+7.3.3 编写游戏循环
+while (remainingLetters > 0) {
+
+}
+
+在游戏循环内部，首先需要做的事就是展示玩家的当前进度。
+alert(answerArray.join(" "));
+
+用join方法把answerArray数组连接成一个字符串，用空格字符作为分隔符，并且用alert方法把这个字符串展示给玩家。
+
+现在需要从玩家那里得到他所猜测的字母，并且确保它是单个的字符。
+var guess = prompt("请猜测一个字母，或者点击取消按钮来停止游戏")；
+if (guess === null) { break;} else if (guess.length !== 1) { alert("请输入一个字母。"); } else { }
+
+注意：无论程序处在循环中的哪个位置，都可以使用关键字break来立即停止循环。
+
+
