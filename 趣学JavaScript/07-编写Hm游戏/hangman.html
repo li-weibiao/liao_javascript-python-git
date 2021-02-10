@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman!</title>
+</head>
+<body>
+	<h1>猜单词游戏</h1>
+	<script type="text/javascript">
+	//创建一个变量来记录单词组
+	var words = ["pen", "good", "red", "moon"];
+	//获得一个随机单词
+	var word = words[Math.floor(Math.random() * words.length)];
+	//创建一个变量来记录答案
+	var answerArray = [];
+	for (var i = 0; i < word.length; i++) { answerArray[i] = "_"; }
+	var remainingLetters = word.length;
+	//游戏主体程序
+	while (remainingLetters > 0) {
+		//提示游戏进度
+		alert(answerArray.join(" "));
+		//从玩家那里得到一个猜测的字母
+		var guess = prompt("请猜测一个字母，或者点击取消按钮来停止游戏");
+		if (guess === null) { 
+			//离开游戏
+			break;
+		} else if (guess.length !== 1) { alert("请输入一个字母。"); 
+		} else { 
+			//更新游戏的状态和玩家的猜测情况
+			for (var j = 0; j < word.length; j++) { if (word[j] === guess) { answerArray[j] = guess; remainingLetters--;}}
+	}
+	//游戏主体程序结束
+	}
+
+	//展示答案并祝贺玩家
+	alert(answerArray.join(" "));
+	alert("干得漂亮！这个单词是 " + word);
+	</script>
+</body>
+</html>
