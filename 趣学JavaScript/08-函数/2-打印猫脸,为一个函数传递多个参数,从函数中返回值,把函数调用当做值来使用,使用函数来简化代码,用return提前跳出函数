@@ -1,0 +1,67 @@
+8.4.1 打印猫脸
+给函数传递参数的一个原因，可能就是要告诉函数做某件事情多少次。
+var drawCats = function (howManyTimes) { for (var i =0; i < howManyTimes; i++) {console.log(i + " =^.^= ");}};
+drawCats(5);  //调用函数
+
+函数体是一个for循环，变量i起始于0，重复递增直到等于howManyTimes减一。
+
+8.4.2 为一个函数传递多个参数
+可以使用多个参数，从而为一个函数传递多个值。
+要增加其他的参数，在关键字function之后的括号中输入这些参数，参数之间用逗号隔开。
+var printMultipleTimes = function (howManyTimes, whatToDraw) {for (var i =0; i < howManyTimes; i++) {console.log(i + ' ' + whatToDraw);}};
+
+当调用带有多个参数的一个函数时，在函数名称之后的括号中插入想要使用的值，值之间用逗号分隔。
+例如：
+printMultipleTimes(5, "=^.^=");
+
+8.5 从函数中返回值
+函数的输出叫做返回值，当调用带有返回值的函数时，可以在代码中的其他地方使用该值（可以把返回值保存到一个变量中，把它传递给另一个函数或者直接将它和其他代码组合到一起）。
+5 + Math.floor(1.23);
+6
+
+Math.floor是一个函数，它返回的是将传递给它的数字向下舍入到最接近的整数。
+
+让我们来创建带有返回值的一个函数。函数double将接收参数number，并返回number*2的结果，也就是说函数double的返回值是参数的两倍。
+var double = function(number){return number * 2;};
+
+要从函数中返回值，使用关键字return，后边紧跟着想要返回的值。
+double(3);
+6
+
+8.6 把函数调用当做值来使用
+当调用包含了一大段代码的一个函数时，在调用函数的位置，将会使用该函数的返回值。例如，使用double函数来获取两个数字翻倍后的结果，然后把两个结果加在一起：
+double(5) + double(6);
+22
+
+在本例中，调用了double函数两次，并且把两个返回值加在一起。
+
+也可以把函数调用作为参数传递给另一个函数，并且用函数的返回值来替代该函数调用。
+double(double(4));
+16
+
+8.7 使用函数来简化代码
+
+8.7.1 挑选随机单词的函数
+为了不用每次都输入相同的代码，可以定义函数。
+如：
+var pickRandomWord = function(words){return words[Math.floor(Math.random() * words.length)];};
+pickRandomWord('hope');
+"e"
+
+把代码放入到一个函数中，意味着我们可以调用该函数，而不必每次都复制并黏贴相同的代码。
+
+8.8 用return提前跳出函数
+只有JS解释器在函数中遇到return，它就会跳出函数，即使函数体中还有代码没有执行。
+
+使用return的一种常见方式是，如果函数的任意一个参数无效，就提前跳出函数。无效指的是，参数不是函数正常运行所需的那种参数。
+var fifthLetter = function(name){if (name.length < 5){return;};return"你的名字的第五个字母是" + name[4] +".";};
+
+调用该函数：
+fifthLetter('asuka');
+"你的名字的第五个字母是a."
+
+如果名字长度小于5：
+fifthLetter('asuk');
+undefined
+
+函数名字不够长，则会通过return语句提前跳出函数。因为return后边没有指定值，所以函数返回了undefined。
