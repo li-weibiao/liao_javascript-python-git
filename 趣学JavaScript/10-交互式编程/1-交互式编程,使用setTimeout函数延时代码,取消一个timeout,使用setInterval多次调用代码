@@ -1,0 +1,35 @@
+第10章 交互式编程
+我们可以创建交互的Web页面，让页面随着时间而改变，并且能够响应用户的行为。
+
+10.1 使用setTimeout函数延时代码
+我们可以告诉JS在一定时间之后执行一个函数，这样的方法叫做超时。
+在JS中，使用setTimeout函数来设置延时。这个函数接受两个参数：分别是一段时间之后要调用的函数以及所要等待的时间（毫秒）。
+setTimeout(func, timeout)
+
+例如：
+var timeUp = function () { alert("时间到了！！！");};
+setTimeout(timeUp, 3000);
+
+调用函数时，返回的数字，被称为timeout ID,用来表示函数调用延迟的时间。
+
+可以使用clearTimeout函数的timeout ID来取消特定的timeout。
+
+10.2 取消一个timeout
+例如：
+var doHomeworkAlarm = function () { alert("该做作业了！！！");};
+var timeoutId = setTimeout(doHomeworkAlarm, 60000);  //60秒后执行这个函数
+clearTimeout(timeoutId);  //取消这个定时函数
+
+10.3 使用setInterval多次调用代码
+setInterval函数在周期性的暂停（或间隔）后，重复调用指定的函数。
+setInterval函数接受两个参数：分别是想要调用的函数和间隔的时间长度（毫秒）。
+setInterval(func, interval)
+
+例如，每秒钟写一条消息到控制台：
+var counter = 1;
+var printMessage = function () { console.log("你最好在 " + counter + "秒后开始！"); counter++;};
+var intervalId = setInterval(printMessage, 1000);
+
+然后要停止的时候用：
+clearInterval(intervalId);
+
