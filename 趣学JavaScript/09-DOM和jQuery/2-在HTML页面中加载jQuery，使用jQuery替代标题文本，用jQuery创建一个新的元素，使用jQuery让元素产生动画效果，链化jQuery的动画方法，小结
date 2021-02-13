@@ -1,0 +1,95 @@
+9.2.1 在HTML页面中加载jQuery
+要使用jQuery类库，首先用如下的HTML代码来加载它：
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+注意，这里的<script>标签没有内容，主要一个src属性。
+src属性允许通过包含JS文件的URL，从而把它插入到页面中。
+
+要查看jQuery类库，访问这个URL，当添加了<script>标签，就会看到已经加载了相应的JS库。
+
+9.2.2 使用jQuery替代标题文本
+我们将使用jQuery替代标题文本，打开dom.html，修改代码。
+<!DOCTYPE html>
+<html>
+<head>
+	<title>和DOM一起玩耍</title>
+</head>
+<body>
+	<h1 id="main-heading">你好，世界!</h1>
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+	<script type="text/javascript">
+		var newHeadingText = prompt("请提供一个新的头部标题:");
+		$("#main-heading").text(newHeadingText);
+	</script>
+</body>
+</html>
+
+添加了一个新的<script>标签以加载jQuery。加载jQuery之后，使用jQuery的$函数来选取一个HTML元素。
+$元素接受一个叫做选择器字符串的参数，该参数告诉jQuery要从DOM树中选择哪一个或哪些元素。在这个示例中，输入
+"#main-heading"作为参数。在选择器字符串中，#字符表示“ID”，所以选择器字符串"#main-heading"的含义是“id为main-heading的元素”。
+
+$函数返回表示选中的元素的一个jQuery对象。例如，$("#main-heading")返回表示（id为“main-heading”）h1元素的jQuery对象。
+
+有了jQuery对象，我们就可以调用jQuery的text方法来修改它的文本。
+
+9.3 用jQuery创建一个新的元素
+可以调用jQuery对象的append方法，来把新元素加入DOM树中，并且把新的元素添加到最初的元素的末尾。
+例如，要在页面的末尾处添加一个p元素，可以在JS中添加如下代码：
+$("body").append("<p>这是一个新段落</p>");
+
+这条语句的第一部分，使用$函数与选择器字符串“body”选择HTML文档的body元素。选择器字符串并不一定是id。
+代码$("body")选择了body元素。同样，也可以使用代码$("p")选中所有p元素。
+
+接下来，在$("body")所返回的对象上，调用append方法。
+传递给append的字符串会转换成一个DOM元素，它被添加到结束标签之前的body元素中。
+
+还可以使用append把多个元素添加到一个for循环中，例如：
+<!DOCTYPE html>
+<html>
+<head>
+	<title>和DOM一起玩耍</title>
+</head>
+<body>
+	<h1 id="main-heading">你好，世界!</h1>
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+	<script type="text/javascript">
+		var newHeadingText = prompt("请提供一个新的头部标题:");
+		$("#main-heading").text(newHeadingText);
+		for (var i = 0; i < 3; i++) { var hobby = prompt("告诉我你的爱好！");
+			$("body").append("<p>" + hobby + "</p>");
+			}
+	</script>
+</body>
+</html>
+
+这个循环执行了3次。每执行一次循环，都会弹出一个输入框，要求用户输入他们的爱好，然后，会把每个爱好放到一组<p>标签中，并且把它传递给append方法，
+把这个爱好添加到body元素的末尾。
+
+9.4 使用jQuery让元素产生动画效果
+许多网站使用动画来展示和隐藏内容。
+jQuery可以使用fadeOut方法来实现一个元素的淡出动画。比如：
+$("h1").fadeOut(3000);
+
+使用$元素选中所有h1元素。因为dom.html只有一个h1元素，然后该元素会慢慢淡去直到消失。
+fadeOut的参数是以毫秒为单位，所以3000表示持续3秒钟的动画。
+
+9.5 链化jQuery的动画方法
+当调用jQuery对象的方法时，方法通常返回最初调用它的对象。
+例如，$("h1")返回表示所有h1元素的一个jQuery对象，$("h1").fadeOut(3000)返回同样表示所有h1元素的jQuery对象。
+要修改h1元素的文本，并且使它的颜色淡去，可以输入如下代码：
+$("h1").text("这个将会消失").fadeOut(3000);
+
+像这样在一行中调用多个方法叫做链化。
+
+可以对相同的元素链化多个动画效果。例如，可以把方法fadeOut和fadeIn的调用链化起来，以便淡出一个元素后再立即将其淡入：
+$("h1").text("这个将会消失,然后慢慢出现。").fadeOut(3000).fadeIn(3000);
+
+fadeIn动画效果让一个不可见的元素淡入回来。
+
+与之类似的还有slideup和slideDown，分别是向上滑动让元素消失，向下滑动让它们再次出现。
+$("h1").slideUp(1000).slideDown(1000);
+
+9.6 小结
+可以用DOM元素，从而让JS来更新HTML。
+jQuery提供了强大的方法来选择元素，修改元素，甚至实现动画。
+我们还介绍了一个新的HTML属性——id，它允许给元素一个唯一的标识符。
