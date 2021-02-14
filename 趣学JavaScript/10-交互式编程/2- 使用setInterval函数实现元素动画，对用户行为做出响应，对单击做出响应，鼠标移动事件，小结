@@ -1,0 +1,93 @@
+10.4 使用setInterval函数实现元素动画
+需要创建一个函数稍稍移动一个元素，然后把该函数和一个短暂的间隔时间作为参数传递给setInterval。
+如果移动足够小并且时间间隔足够短，那么动画效果看上去就非常平缓。
+
+通过浏览器窗口将一些文本水平移动，从而让这些文本的位置在一个HTML文档中产生动画效果。
+<!DOCTYPE html>
+<html>
+<head>
+	<title>移动文档</title>
+</head>
+<body>
+	<h1 id="heading">你好，世界！</h1>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+		var leftOffset = 0;
+		var moveHeading = function () { $("#heading").offset({ left: leftOffset });
+			leftOffset++;
+			if (leftOffset > 200) { leftOffset = 0;}
+		};
+		setInterval(moveHeading, 30);
+	</script>
+</body>
+</html>
+
+offset方法是设置标题的左边距，也就是标题距离左边缘的距离。
+offset方法可以接受包含left属性的对象，以设置元素的左偏移位置；或者接受包含top属性的对象，以设置元素的上偏移位置。
+如果要设置静态的偏移位置，可以把属性设置成一个数值，如：
+$("#heading").offset({ left: 100 })
+
+10.5 对用户行为做出响应
+在浏览器中，每次执行一个诸如单击、键盘输入或者移动鼠标这样的动作，就会触发一个事件调用。
+事件就是浏览器表示“这个事情发生了！”的方式。
+我们可以在事件发生的位置为元素增加一个事件处理程序，以监控中心事件。
+
+10.5.1 对单击做出响应
+当用户在浏览器中单击一个元素时，这会触发一个单击事件，jQuery使得为单击事件添加处理程序变得简单。
+<!DOCTYPE html>
+<html>
+<head>
+	<title>移动文档</title>
+</head>
+<body>
+	<h1 id="heading">你好，世界！</h1>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+		var clickHandler = function (event) {
+			console.log("点击 " + event.pageX + " " + event.pageY);
+		};
+		$("h1").click(clickHandler);
+	</script>
+</body>
+</html>
+
+使用console.log把这个event的pageX和pageY属性输出，换句话讲，这些属性告诉我们该event的x坐标和y坐标,也就是发生单击的页面位置。
+代码$("h1")选中h1元素，调用$("h1").click(clickHandler)的含义是“当单击h1元素时，调用clickHandler函数，并且将event对象传递给该函数。”。
+
+10.5.2 鼠标移动事件
+每次鼠标移动都会触发mousemove事件。
+创建mousemove.html的文件，输入代码：
+<!DOCTYPE html>
+<html>
+<head>
+	<title>鼠标移动</title>
+</head>
+<body>
+	<h1 id="heading">你好，世界！</h1>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+		$("html").mousemove(function (event) {
+			$("#heading").offset({left:event.pageX,
+				top:event.pageY
+			});
+		});
+	</script>
+
+</body>
+</html>
+
+使用$("html").mousemove(handler)为mousemove添加了一个处理程序。
+使用$("html")选中这个html元素，以便当鼠标在页面上任何位置移动时都会触发这个处理程序。
+每次用户移动鼠标，都会调用传递到mousemove后面的括号中的函数。
+
+在这个示例中，把这个处理器程序函数直接传递给mousemove方法，而不是单独创建一个事件处理程序，并将该函数名称传递给mousemove方法。
+这是编写事件处理程序的常见方法，所以最好熟悉这种类型的语法。
+
+在这个事件处理程序函数中，选择了标题元素，并且调用了它的offset方法。offset方法拥有left和top属性。
+
+10.6 小结
+在本章中，我们学习了如何编写想要让其运行时才会运行的JS。比如setTimeout函数和setInterval函数都是很不错的。
+如果想要用户在浏览器中执行了某些动作之后再运行代码，可以使用click或mousemove事件。
