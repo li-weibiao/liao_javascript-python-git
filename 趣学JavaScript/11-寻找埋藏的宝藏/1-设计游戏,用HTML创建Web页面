@@ -1,0 +1,31 @@
+第11章 寻找埋藏的宝藏
+11.1 设计游戏
+11.2 用HTML创建Web页面
+我们将针对宝藏地图使用一个名为img的新元素，并且添加一个p元素，可以在p元素处向玩家显示信息。
+创建treasure.html：
+<!DOCTYPE html>
+<html>
+<head>
+	<title>寻找宝藏</title>
+</head>
+<body>
+	<h1 id="heading">寻找宝藏！</h1>
+	<img id="map" width=400 height=400 src="D:\worker\学习\javascript\08-寻找埋藏的宝藏\caibao.jpg">
+	<p id="distance"></p>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" type="text/javascript">
+	</script>
+
+	<script type="text/javascript">
+		//这里是游戏代码
+
+	</script>
+</body>
+</html>
+
+img元素用于在HTML文档中包含图像。
+和我们所看到的其他HTML元素不同，img不使用结束标签。
+
+为了告诉文档我们要显示哪个元素，我们使用src属性来包含图像的Web地址。
+
+p元素给了一个名为"distance"的id，我们将使用JS告诉玩家他们距离宝藏有多么近，从而给该元素添加文本。
+
