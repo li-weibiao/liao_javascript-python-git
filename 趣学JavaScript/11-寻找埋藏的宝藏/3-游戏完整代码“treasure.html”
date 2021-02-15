@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>寻找宝藏</title>
+</head>
+<body>
+	<h1 id="heading">寻找宝藏！</h1>
+	<img id="map" width=400 height=400 src="D:\worker\学习\javascript\08-寻找埋藏的宝藏\caibao.jpg">
+	<p id="distance"></p>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" type="text/javascript">
+	</script>
+
+	<script type="text/javascript">
+		//这里是游戏代码
+		//从0到size之间得到一个随机数
+		var getRandomNumber = function (size) { return Math.floor(Math.random() * size);};
+		//计算宝藏与玩家点击之间的距离
+		var getDistance = function (event, target) {var diffX = event.offsetX - target.x; var diffY = event.offsetY - target.y; return Math.sqrt((diffX * diffX) + (diffY * diffY));};
+		//给玩家提示信息
+		var getDistanceHint = function (distance) {if (distance<10){ return "相当近了！";} else if (distance < 20){ return "快到了";} else if (distance < 40) { return "近了";} else if (distance < 80){ return "还有些距离";} else if (distance < 160){ return "远";} else if (distance < 320){ return "真的远";} else { return "相当远！";}};
+		//设置我们的值
+		var width = 400;
+		var height = 400;
+		var clicks = 0;
+		//创建一个随机位置
+		var target = { x:getRandomNumber(width), y:getRandomNumber(height)};
+		//捕捉点击事件
+		$("#map").click(function (event) { clicks++;
+ 			//得到玩家点击与宝藏之间的距离
+		 	var distance = getDistance(event, target);
+ 			//计算距离
+ 			var distanceHint = getDistanceHint(distance);
+ 			//更新事件
+ 			$("#distance").text(distanceHint);
+ 			//条件合适，则判断赢
+ 			if (distance < 8){ alert("恭喜你找到了宝藏，总共用了 " + clicks + " 次数！");}
+		});
+	</script>
+</body>
+</html>
