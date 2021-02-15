@@ -1,0 +1,84 @@
+11.3 选取一个随机藏宝位置
+现在，我们来构建游戏的JS代码。
+首先，我们要宝藏选取一个随机的位置。由于地图的大小是400像素*400像素的大小，
+所以，左上角的像素的坐标将是{x:0,y:0},而右下角的像素将是{x:399,y:399}。
+
+为了在藏宝图中设置一个随机的坐标点，我们为x值和y值分别选取一个0到399之间的随机数。
+为了生成这个随机数，我们编写了一个函数，它接受一个size参数作为输入，并且选取从0到size（但是不包括size）的一个随机数：
+var getRandomNumber = function (size) { return Math.floor(Math.random() * size);};
+
+调用getRandomNumber(400)将返回0到399之间的一个随机数，而这正是我们所需要的。
+
+11.3.2 设置宝藏坐标
+var width = 400;
+var height = 400;
+var target = { x;getRandomNumber(width), y:getRandomNumber(height)};
+
+每次运行这段代码，我们都会得到地图上的一个新的随机位置，并且选取的坐标将存储到target变量的x和y属性中。
+
+11.4 单击事件处理程序
+单击事件处理程序是当单击藏宝图的时候所调用的函数。
+$("#map").click(function (event) { });
+
+首先，使用$("#map")选择藏宝图区域（因为img元素有一个“map”的id），随后进入到单击事件处理函数。每次玩家单击地图，都会执行花括号之间的函数体。有关单击的信息，会通过event参数作为对象传递到函数体中。
+
+11.4.1 统计单击
+单击事件处理程序需要记录总的单击次数。
+定义一个clicks的变量并将其初始化为0：
+var clicks = 0;
+
+在单击事件处理程序中，包含了clicks++，以便每次玩家单击地图，都会将clicks加1。
+
+11.4.2 计算单击和宝藏之间的距离
+编写一个名为getDistance的函数，来计算玩家单击后，离宝藏近还是远。
+var getDistance = function (event, target) {var diffx = event.offsetX - target.x; var diffY = event.offsetY - target.y; return Math.sqrt((diffX * diffX) + (diffY * diffY));};
+
+getDistance函数接受两个对象作为参数，即event和target。
+event对象是传递给单击事件处理程序的对象，它带有关于玩家单击的很多内建信息。它包含offsetX和offsetY两个属性，它们告诉我们单击的x坐标和y坐标。
+
+11.4.3 使用毕达哥拉斯定理
+使用毕达哥拉斯定理来计算两个点之间的距离。
+Math.sqrt函数是来求平方根的。
+
+11.4.4 告诉玩家他们有多近
+定义getDistanceHint函数：
+var getDistanceHint = function (distance) {if (distance<10){ return "相当近了！";} else if (distance < 20){ return "快到了";} else if (distance < 40) { return "近了";} else if (distance < 80){ return "还有些距离";} else if (distance < 160){ return "远";} else if (distance < 320){ return "真的远";} else { return "相当远！";}};
+
+将消息作为文本添加给Web页面的p元素，从而显示该信息。
+如下的代码将会放入到单击事件处理程序中，以计算距离，选取相应的字符串，并向玩家显示该字符串。
+var distance = getDistance(event, target);
+var distanceHint = getDistanceHint(distance);
+$("#distance").text(distanceHint);
+
+11.4.5 检查玩家是否赢了
+如下代码检查到宝藏的距离，并且显示一条消息告诉玩家他们已经赢了：
+if (distance < 8){ alert("恭喜你找到了宝藏，总共用了 " + clicks + " 次数！");}
+
+11.5 综合应用
+现在将所有的代码组合为完整的脚本。将这些代码添加到treasure.html中的第二个<script>标签中，就可以玩这个游戏了。
+//从0到size之间得到一个随机数
+var getRandomNumber = function (size) { return Math.floor(Math.random() * size);};
+//计算宝藏与玩家点击之间的距离
+var getDistance = function (event, target) {var diffx = event.offsetX - target.x; var diffY = event.offsetY - target.y; return Math.sqrt((diffX * diffX) + (diffY * diffY));};
+//给玩家提示信息
+var getDistanceHint = function (distance) {if (distance<10){ return "相当近了！";} else if (distance < 20){ return "快到了";} else if (distance < 40) { return "近了";} else if (distance < 80){ return "还有些距离";} else if (distance < 160){ return "远";} else if (distance < 320){ return "真的远";} else { return "相当远！";}};
+//设置我们的值
+var width = 400;
+var height = 400;
+var clicks = 0;
+//创建一个随机位置
+var target = { x;getRandomNumber(width), y:getRandomNumber(height)};
+//捕捉点击事件
+$("#map").click(function (event) { clicks++;
+ //得到玩家点击与宝藏之间的距离
+ var distance = getDistance(event, target);
+ //计算距离
+ var distanceHint = getDistanceHint(distance);
+ //更新事件
+ $("#distance").text(distanceHint);
+ //条件合适，则判断赢
+ if (distance < 8){ alert("恭喜你找到了宝藏，总共用了 " + clicks + " 次数！");}
+});
+
+11.6 小结
+img元素用来为Web页面添加图像。最后学习了如何使用JS来计算两点之间的距离。
