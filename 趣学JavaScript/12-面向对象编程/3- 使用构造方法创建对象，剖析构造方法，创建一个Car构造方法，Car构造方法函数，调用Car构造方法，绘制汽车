@@ -1,0 +1,78 @@
+12.3 使用构造方法创建对象
+JS构造方法是一个函数，它创建对象并给它们一组内建的属性和方法。
+一旦你创建了一个构造方法，可以使用它来创建想要的那么多个相同的对象。
+
+12.3.1 剖析构造方法
+每次调用一个构造方法，它都会创建一个对象并赋予新的对象内建的属性。
+要调用一个常规的函数，输入函数的名称，后面跟着一对圆括号。
+要调用一个构造方法，输入关键字new（这告诉JS，想要将该函数用作一个构造方法），后面跟着构造方法的名称和圆括号。
+例如：
+var car = new Car(100, 200)
+
+注意：大多数的JS程序员在命名构造方法的时候，用一个大写的字母开头，以便于第一眼就看出它与其他函数的区别。
+
+12.3.2 创建一个Car构造方法
+现在来创建一个Car构造方法，它将为所创建的每一个新的对象都添加一个x和y属性。这些属性将用来设置在屏幕上绘制每一个汽车的位置。
+
+创建HTML文档：
+创建一个名为cars.html的新文件，代码如下：
+<!DOCTYPE html>
+<html>
+<head>
+	<title>汽车</title>
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+		//代码在这儿
+	</script>
+
+</body>
+</html>
+
+Car构造方法函数：
+将代码添加在空的<script>标签中，以创建Car方法，它会给每一辆汽车一组坐标。
+<script type="text/javascript">
+    var Car = function (x, y){this.x = x; this.y = y;};
+</script>
+
+新的构造方法Car接受参数x和y。我们已经添加了属性this.x和this.y，将传递给Car的x值和y值存储到新的对象中。
+通过这种方法，每次把Car当作一个构造方法调用的时候，都会创建一个新的对象，并且将其x和y属性设置为我们所指定的参数。
+
+调用Car构造方法：
+正如前面所提到的，关键字new告诉JS，我们要调用一个构造方法来创建一个新的对象。
+例如，要创建一个名为tesla的新的汽车对象，在web浏览器中打开car.html，然后在控制台输入：
+var tesla = new Car(10, 20);
+tesla;
+Car {x: 10, y: 20}
+
+代码new Car(10, 20)告诉JS使用Car作为构造方法创建一个对象，传入参数10和20作为其x和y属性，并且返回该对象。
+使用var tesla将返回的对象赋值给变量 tesla。
+
+12.4 绘制汽车
+为了显示Car构造方法所创建的对象，我们将创建一个名为drawCar的函数，在浏览器窗口中，在每个汽车对象的（x, y）位置放置一个汽车的图像。
+在cars.html中的<script>标签之间，添加如下的代码：
+<script type="text/javascript">
+	var Car = function (x, y){this.x = x; this.y = y;};
+	var drawCar = function(car){
+		var carHtml = '<img src="D:\worker\学习\javascript\09-面向对象编程\qiche.jpg">';
+		var carElement = $(carHtml);
+		carElement.css({position:"absolute", left:car.x, top:car.y});
+		$("body").append(carElement);
+	};
+</script>
+
+我们把carHtml传递给$函数，该函数将其从一个字符串转换为一个jQuery元素，其中带有用于<img>表面的信息，并且将该元素添加到页面之前可以调整它。
+
+在carElement上使用css方法来设置汽车图像的位置。
+这段代码将图像的left位置设置为汽车对象的x值，将其top位置设置为y值。
+换句话说，图像的在边界将位于距离浏览器窗口的左边界的x像素处，图像的上边界将位于窗口的上边界以下y像素处。
+
+注意：offset不能用于多个元素，但是可以用css来替代它。offset方法是设置标题的左边距。
+
+最后，使用jQuery将carElement添加到页面中的body元素后面。
+这最后一步，使得carElement出现在页面上。
+
+
+
